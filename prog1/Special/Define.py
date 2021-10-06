@@ -1,5 +1,6 @@
 # Define -- Parse tree node strategy for printing the special form define
 
+import sys
 from Special import Special
 
 class Define(Special):
@@ -10,16 +11,16 @@ class Define(Special):
     def print(self, t, n, p):
         # TODO: Implement this function.
         for r in range(0, n):
-            self.write(" ")
-        self.write("(define")
+            sys.stdout.write(" ")
+        sys.stdout.write("(define")
         if(t.getCdr().getCar().isSymbol()):
             t.getCdr().getCar().print(0, False)
         else:
-            raise ValueError("Syntax Error")
-        self.write(" ")
+            raise Exception("Syntax Error")
+        sys.stdout.write(" ")
         if(t.getCdr().getCdr().getCar().isNull != t.getCdr().getCdr().getCar()):
             t.getCdr().getCdr().getCar().print(0, True)
         else:
-            raise ValueError("Syntax Error")
-        self.write(")")
+            raise Exception("Syntax Error")
+        sys.stdout.write(")")
         pass
