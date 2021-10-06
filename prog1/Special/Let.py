@@ -1,5 +1,6 @@
 # Let -- Parse tree node strategy for printing the special form let
 
+import sys
 from Special import Special
 
 class Let(Special):
@@ -10,28 +11,28 @@ class Let(Special):
     def print(self, t, n, p):
         # TODO: Implement this function.
         for i in range(0,n):
-            self.write(" ")
+            sys.stdout.write(" ")
 
-        self.write("(let ")
+        sys.stdout.write("(let ")
 
         if t.getCdr().getCar().isPair():
             t.getCdr().getCar().print(0,False)
 
         else:
-            raise ValueError("Syntax Error")
+            raise Exception("Syntax Error")
 
-        self.write()
+        sys.stdout.write()
 
         if t.getCdr().getCdr().isPair():
             t.getCdr().getCdr.print(n+2, True)
         
         else:
-            raise ValueError ("Syntax Error")
+            raise Exception("Syntax Error")
         
         self.write()
 
         for i in range (0,n):
-            self.write(" ")
+            sys.stdout.write(" ")
 
         self.write(" ")
         
