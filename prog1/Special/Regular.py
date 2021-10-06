@@ -1,5 +1,6 @@
 # Regular -- Parse tree node strategy for printing regular lists
 
+import sys
 from Special import Special
 
 class Regular(Special):
@@ -11,14 +12,14 @@ class Regular(Special):
         # TODO: Implement this function.
 
         for i in range (0,n):
-            self.write(" ")
+            sys.stdout.write(" ")
 
         if not p:
-            self.write("(")
+            sys.stdout.write("(")
 
         t.getCar().print(0)
 
-        self.write(" ")
+        sys.stdout.write(" ")
 
         t.getCdr().print(0,True)
         pass
