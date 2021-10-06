@@ -1,5 +1,6 @@
 # Cond -- Parse tree node strategy for printing the special form cond
 
+import sys
 from Special import Special
 
 class Cond(Special):
@@ -10,10 +11,10 @@ class Cond(Special):
     def print(self, t, n, p):
         # TODO: Implement this function.
         for r in range(0, n):
-            self.write(" ")
-        self.write("(cond")
+            sys.stdout.write(" ")
+        sys.stdout.write("(cond")
         if(t.getCdr().isPair()):
             t.getCDR().print(n + 2, True)
         else:
-            raise ValueError("Syntax Error")
+            raise Exception("Syntax Error")
         pass
