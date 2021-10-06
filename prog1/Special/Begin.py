@@ -1,5 +1,6 @@
 # Begin -- Parse tree node strategy for printing the special form begin
 
+import sys
 from Special import Special
 
 class Begin(Special):
@@ -10,13 +11,13 @@ class Begin(Special):
     def print(self, t, n, p):
         # TODO: Implement this function.
         for r in range (0, n):
-            self.write(' ')
-        self.write("(begin")
+            sys.stdout.write(' ')
+        sys.stdout.write("(begin")
         if(t.getCdr().isPair()):
-            t.getCDR().print(n + 2, p)
+            t.getCdr().print(n + 2, p)
         else:
-            raise ValueError("Syntax Error")
-        for r in range (0, n):
-            self.write(" ")
-        self.write(")")
+            raise Exception("Syntax Error")
+        for i in range (0, n):
+            sys.stdout.write(" ")
+        sys.stdout.write(")")
         pass
