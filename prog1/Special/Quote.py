@@ -1,5 +1,6 @@
 # Quote -- Parse tree node strategy for printing the special form quote
 
+import sys
 from Special import Special
 
 class Quote(Special):
@@ -10,10 +11,10 @@ class Quote(Special):
     def print(self, t, n, p):
         # TODO: Implement this function.
 
-        self.write("'")
+        sys.stdout.write("'")
 
         if t.getCdr() == None:
-            self.write("")
+            sys.stdout.write("")
         
         else:
             t.getCdr().print(0,False)
