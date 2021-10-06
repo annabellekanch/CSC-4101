@@ -63,10 +63,10 @@ class Scanner:
                 elif ch == 'f':
                     return Token(TokenType.FALSE)
                 elif ch == "":
-                    sys.stderr.write("Unexpected EOF following #\n")
+                    sys.stdout.write("Unexpected EOF following #\n")
                     return None
                 else:
-                    sys.stderr.write("Illegal character '" +
+                    sys.stdout.write("Illegal character '" +
                                      chr(ch) + "' following #\n")
                     return self.getNextToken()
 
