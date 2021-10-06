@@ -49,35 +49,33 @@ class Parser:
             return self.parseExp(token)
 
     def parseExp(self):
-        token = self.getType()
-        if(token.getType() == TokenType.LPAREN):
+        if(Token.getType() == TokenType.LPAREN):
             return self.parseRest()
-        elif(self.getType() == TokenType.FALSE):
+        elif(Token.getType() == TokenType.FALSE):
             return self.BooleanLit(False)
-        elif(self.getType() == TokenType.TRUE):
+        elif(Token.getType() == TokenType.TRUE):
             return self.BoolLit(True)
-        elif(self.getType() == TokenType.QUOTE):
+        elif(Token.getType() == TokenType.QUOTE):
             return self.Cons(self.Ident("quote"), self.Cons(self.parseNextExp(), self.Nil()))
-        elif(self.getType() == TokenType.INT):
+        elif(Token.getType() == TokenType.INT):
             return self.IntLit(self.getIntVal())
-        elif(self.getType() == TokenType.String):
+        elif(Token.getType() == TokenType.String):
             return self.StringLit(self.getStrVal())
-        elif(self.getType() == TokenType.IDENT):
+        elif(Token.getType() == TokenType.IDENT):
             return self.IDENT(self.getName())
         else:
             sys.stdout.write("Something broke parseExp")
         return None
 
     def parseRest(self):
-        token = self.getNextToken()
-        if(token == None):
+        if(Token == None):
             return None
-        elif(token.getType() == TokenType.RPAREN):
+        elif(Token.getType() == TokenType.RPAREN):
             return self.Nil()
-        elif(token.getType() == TokenType.DOT):
+        elif(Token.getType() == TokenType.DOT):
             return self.Cons(self.parseNextExp(), self.parseRest())
         else:
-            return self.Cons(self.parseExp(token), self.parseRest())
+            return self.Cons(self.parseExp(Token), self.parseRest())
         return None
 
     # TODO: Add any additional methods you might need
