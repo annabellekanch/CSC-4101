@@ -46,25 +46,26 @@ class Parser:
         if(token == None):
             return None
         else:
-            return parseExp(token)
+            return self.parseExp(token)
 
     def parseExp(self):
+        token = self.getType()
         if(token.getType() == TokenType.LPAREN):
             return self.parseRest()
-        elif(token.getType() == TokenType.FALSE):
-            return self.BooleanLit(false)
-        elif(token.getType() == TokenType.TRUE):
-            return self.BoolLit(true)
-        elif(token.getType() == TokenType.QUOTE):
-            return self.Cons(self.Ident("quote"), self.Cons(self.parseNextExp(), Nil()))
-        elif(token.getType() == TokenType.INT):
-            return self.IntLit(token.getIntVal())
-        elif(token.getType() == TokenType.String):
-            return self.StringLit(token.getStrVal())
-        elif(token.getType() == TokenType.IDENT):
-            return self.IDENT(token.getName())
+        elif(self.getType() == TokenType.FALSE):
+            return self.BooleanLit(False)
+        elif(self.getType() == TokenType.TRUE):
+            return self.BoolLit(True)
+        elif(self.getType() == TokenType.QUOTE):
+            return self.Cons(self.Ident("quote"), self.Cons(self.parseNextExp(), self.Nil()))
+        elif(self.getType() == TokenType.INT):
+            return self.IntLit(self.getIntVal())
+        elif(self.getType() == TokenType.String):
+            return self.StringLit(self.getStrVal())
+        elif(self.getType() == TokenType.IDENT):
+            return self.IDENT(self.getName())
         else:
-            sys.stderr.write("Something broke parseExp")
+            sys.stdout.write("Something broke parseExp")
         return None
 
     def parseRest(self):
@@ -72,7 +73,7 @@ class Parser:
         if(token == None):
             return None
         elif(token.getType() == TokenType.RPAREN):
-            return Nil()
+            return self.Nil()
         elif(token.getType() == TokenType.DOT):
             return self.Cons(self.parseNextExp(), self.parseRest())
         else:
@@ -82,4 +83,4 @@ class Parser:
     # TODO: Add any additional methods you might need
 
     def __error(self, msg):
-        sys.stderr.write("Parse error: " + msg + "\n")
+        sys.stdout.write("Parse error: " + msg + "\n")
