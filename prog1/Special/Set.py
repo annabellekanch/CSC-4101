@@ -9,5 +9,23 @@ class Set(Special):
     
     def print(self, t, n, p):
         # TODO: Implement this function.
+
+        if p == False:
+            self.write("(")
+        
+        if t.getCar().isPair():
+            t.getCar().print(0,False)
+        
+        else:
+            t.getCar().print(0,True)
+        
+        self.write(" ")
+
+        if t.getCdr() == None:
+            self.write(")")
+        
+        else:
+            t.getCdr().print(0,True)
+
         pass
 

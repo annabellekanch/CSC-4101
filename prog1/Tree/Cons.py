@@ -1,5 +1,14 @@
 # Cons -- Parse tree node class for representing a Cons node
 
+from typing import Set
+from Special.Begin import Begin
+from Special.Cond import Cond
+from Special.Define import Define
+from Special.If import If
+from Special.Lambda import Lambda
+from Special.Let import Let
+from Special.Quote import Quote
+from Special.Regular import Regular
 from Tree import Node
 from Tree import Ident
 
@@ -20,10 +29,49 @@ class Cons(Node):
     def parseList(self):
         # TODO: implement this function and any helper functions
         # you might need
-        self.form = None
+        if self.car.isSymbol == True:
+            name = self.car.getName()
+
+            if name == "quote":
+                return Quote()
+            
+            elif name == "lambda":
+                return Lambda()
+
+            elif name == "begin":
+                return Begin()
+
+            elif name == "if":
+                return If()
+            
+            elif name == "cond":
+                return Cond()
+            
+            elif name == "let":
+                return Let()
+
+            elif name == "set!":
+                return set()
+
+            elif name == "define":
+                return Define()
+            
+            else:
+                return Regular()
+
+        else:
+            return Regular()
+
 
     def print(self, n, p=False):
         self.form.print(self, n, p)
+    
+    def getCar(self):
+        return super().getCar()
+
+    def getCdr(self):
+        return super().getCdr()
+
 
 if __name__ == "__main__":
     c = Cons(Ident("Hello"), Ident("World"))

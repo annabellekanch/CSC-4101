@@ -9,4 +9,30 @@ class Let(Special):
 
     def print(self, t, n, p):
         # TODO: Implement this function.
+        for i in range(0,n):
+            self.write(" ")
+
+        self.write("(let ")
+
+        if t.getCdr().getCar().isPair():
+            t.getCdr().getCar().print(0,False)
+
+        else:
+            raise ValueError("Syntax Error")
+
+        self.write()
+
+        if t.getCdr().getCdr().isPair():
+            t.getCdr().getCdr.print(n+2, True)
+        
+        else:
+            raise ValueError ("Syntax Error")
+        
+        self.write()
+
+        for i in range (0,n):
+            self.write(" ")
+
+        self.write(" ")
+        
         pass
