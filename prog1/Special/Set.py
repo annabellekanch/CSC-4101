@@ -1,5 +1,6 @@
 # Set -- Parse tree node strategy for printing the special form set!
 
+import sys
 from Special import Special
 
 class Set(Special):
@@ -11,7 +12,7 @@ class Set(Special):
         # TODO: Implement this function.
 
         if p == False:
-            self.write("(")
+            sys.stdout.write("(")
         
         if t.getCar().isPair():
             t.getCar().print(0,False)
@@ -19,10 +20,10 @@ class Set(Special):
         else:
             t.getCar().print(0,True)
         
-        self.write(" ")
+        sys.stdout.write(" ")
 
         if t.getCdr() == None:
-            self.write(")")
+            sys.stdout.write(")")
         
         else:
             t.getCdr().print(0,True)
