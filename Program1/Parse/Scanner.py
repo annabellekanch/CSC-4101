@@ -41,9 +41,17 @@ class Scanner:
             # TODO: Skip white space and comments
 
             # Return None on EOF
-            if ch == "":
+            if ch == ';' or ch == ' ':
+                while ch == 'j' or ch == ' ':
+                    if ch == ' ':
+                        ch = self.read()
+                    else:
+                        rest = self.In.ReadLine()
+                    return self.getNextToken()
+
+            elif ch == -1:
                 return None
-    
+
             # Special characters
             elif ch == '\'':
                 return Token(TokenType.QUOTE)
@@ -75,30 +83,47 @@ class Scanner:
             elif ch == '"':
                 self.buf = []
                 # TODO: scan a string into the buffer variable buf
-    
+
+                ch = self.read()
+                for i in range(0, ch != '"'):
+                    self.buf[i] = chr(ch)
+                    ch = self.In.read()
                 return StrToken("".join(self.buf))
 
             # Integer constants
             elif self.isDigit(ch):
                 i = ord(ch) - ord('0')
                 # TODO: scan the number and convert it to an integer
-
+                pk = self.peek()
+                while pk >= '0' and pk <= '9':
+                    ch = self.read()
+                    i = (i * 10) + int(ch)
+                    pk = self.peek()
                 # make sure that the character following the integer
                 # is not removed from the input stream
                 return IntToken(i)
     
             # Identifiers
-            elif ch >= 'A' and ch <= 'Z':
+            elif (ch >= 'A' and ch <= 'Z') or (ch >= 'a' and ch <= 'z') or ch == '!' or ch == '$' or ch == '%' or ch == '&' or ch == '*' or ch == '+' or ch == '-' or ch == '.' or ch == '/' or ch == ':' or ch == '<' or ch == '=' or ch == '>' or ch == '?' or ch == '@' or ch == '^'  or ch == '_':
                 # or ch is some other vaid first character
                 # for an identifier
-                self.buf = []
+                #self.buf = []
                 # TODO: scan an identifier into the buffer variable buf
-                self.buf[0] = chr(ch)
-                for i in range(0, self.peek() != ' ' or self.peek() != ')'):
-                    {
-                        self.buf[i] == chr(ch)
-                    }
-
+                #while((chr(self.In.peek() != '\"' or self.In.peek() == 8220 or self.In.peek() == 8221))):
+                    #self.buf[count] = chr(self.In.read())
+                #count+= 1
+                
+                self.buf = [10]
+                count = 0
+                #for i in range(0, self.peek() != ' ' or self.peek() != ')'):
+                    #self.buf[i] == ch
+                    #ch = self.read()
+                
+                while self.peek() != ' ' or self.peek() != ')':
+                    self.buf[count] = ch
+                    ch = self.read()
+                    count += 1
+    
                 # make sure that the character following the identifier
                 # is not removed from the input stream
                 return IdentToken("".join(self.buf))
