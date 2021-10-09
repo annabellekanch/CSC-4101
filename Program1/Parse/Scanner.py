@@ -29,6 +29,10 @@ class Scanner:
     @staticmethod
     def isDigit(ch):
         return ch >= '0' and ch <= '9'
+    def isWhiteSpace(self, ch):
+        if(ch == ' '):
+            return True
+        return False
 
     def getNextToken(self):
         try:
@@ -41,15 +45,14 @@ class Scanner:
             # TODO: Skip white space and comments
 
             # Return None on EOF
-            if ch == ';' or ch == ' ':
-                while ch == 'j' or ch == ' ':
-                    if ch == ' ':
-                        ch = self.read()
-                    else:
-                        rest = self.In.ReadLine()
-                    return self.getNextToken()
+            if(ch == -1):
+                return None
+            elif(self.isWhiteSpace(ch)):
+                return self.getNextToken()
+            # TODO: Skip white space and comments
 
-            elif ch == -1:
+            # Return None on EOF
+            if ch == "":
                 return None
 
             # Special characters
