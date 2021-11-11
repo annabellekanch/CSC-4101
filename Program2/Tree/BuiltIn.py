@@ -15,6 +15,7 @@
 
 import sys
 import os
+import math
 from Parse import *
 from Tree import Node
 from Tree import BoolLit
