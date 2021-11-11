@@ -13,6 +13,7 @@ import sys
 from Tree import Node
 from Tree import StrLit
 from Tree import Environment
+from Tree.Nil import Nil
 
 class Closure(Node):
     util = None
@@ -50,4 +51,19 @@ class Closure(Node):
     # to report an error.  It should be overridden only in classes
     # BuiltIn and Closure.
     def apply(self, args):
-        return StrLit("Error: Closure.apply not yet implemented")
+        
+        e = self.getEnv()
+        function = self.getFun()
+        sym = function.getCar()
+        function = function.getCdr().getCar()
+
+        while args is not None and args.getCar().isNull() is False:
+            e.define(sym.getCar(), args.getCar())
+            sym = sym.getCdr()
+            args = args.getCdr()
+
+        
+        return function.eval(e)
+
+    def eval(env):
+        return Nil
