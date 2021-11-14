@@ -10,3 +10,6 @@ class Lambda(Special):
 
     def print(self, t, n, p):
         Printer.printLambda(t, n, p)
+        
+    def eval(self, t, env):
+        return Closure(t.getCdr(), env)
