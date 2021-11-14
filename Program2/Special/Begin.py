@@ -10,3 +10,6 @@ class Begin(Special):
 
     def print(self, t, n, p):
         Printer.printBegin(t, n, p)
+    
+    def eval(self, t, env):
+        return None
