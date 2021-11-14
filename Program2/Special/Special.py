@@ -19,6 +19,9 @@ class Special(ABC):
     @abstractmethod
     def print(self, t, n, p):
         pass
+    
+    def eval(self, aThis, env):
+        pass
 
     def _error(self, msg):
         sys.stderr.write("Error: " + msg + "\n")
